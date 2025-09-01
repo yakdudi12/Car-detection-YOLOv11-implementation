@@ -92,6 +92,8 @@ pause
 Annotated videos with bounding boxes around detected vehicles.
 Training metrics: precision, recall, mAP.
 Example output:
+![Demo](outputs/Results1.gif)
+![Demo](outputs/results2.gif)
 <img width="1912" height="1079" alt="image" src="https://github.com/user-attachments/assets/92d03663-26c2-4f71-9884-09ba0f17b214" />
 ![val_batch0_pred](https://github.com/user-attachments/assets/cb522236-76a6-4588-bee8-53548047e938)
 ![val_batch1_labels](https://github.com/user-attachments/assets/d1c81060-cdf3-46fd-aac3-c7cd5ae86ec7)
