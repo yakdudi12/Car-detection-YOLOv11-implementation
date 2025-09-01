@@ -9,7 +9,7 @@ Project Structure
  ├── 📄 YOLO_CD_inference.py      # Inference with pre-trained model (1 video)
  ├── 📄 YOLO_CD_script.py         # Py code for larger-scale production (>1 videos)
  ├── 📄 YOLO_deepsort.py          # Deepsort Implementation
- ├── 📄 run_all_videos.bat        # Script customizable to MLops
+ ├── 📄 run_all_videos.bat        # Customizable Script to MLops
  ├── 📄 README.md                 # This file
  ├── 📂 Plots & analitics         # All training and performance data
       ├──📂 analytics_train_nano
