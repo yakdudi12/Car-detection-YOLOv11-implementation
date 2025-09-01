@@ -93,6 +93,10 @@ Annotated videos with bounding boxes around detected vehicles.
 Training metrics: precision, recall, mAP.
 Example output:
 <img width="1912" height="1079" alt="image" src="https://github.com/user-attachments/assets/92d03663-26c2-4f71-9884-09ba0f17b214" />
+![val_batch0_pred](https://github.com/user-attachments/assets/cb522236-76a6-4588-bee8-53548047e938)
+![val_batch1_labels](https://github.com/user-attachments/assets/d1c81060-cdf3-46fd-aac3-c7cd5ae86ec7)
+<img width="2250" height="1500" alt="BoxP_curve" src="https://github.com/user-attachments/assets/bea61dcc-5d16-4301-baf4-72e5f26f5533" />
+
 
 ✒️ References
 * Train dataset: Road Vehicle Images Dataset https://www.kaggle.com/datasets/ashfakyeafi/road-vehicle-images-dataset/data (Ashfak Yeafi)
