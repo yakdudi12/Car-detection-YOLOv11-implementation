@@ -1,14 +1,19 @@
-# Car-detection-YOLOv11-implementation
-Vehicle detection project in videos using YOLOv11. It allows batch capture of traffic or parking videos, identifying the presence of cars using a fine-tuned model and automatically saving the results for later analysis. It allows training a model, performing inference on single videos, and processing multiple videos in batch automatically.
+# Car-detection-YOLOv11+DeepSort-implementation
+Vehicle detection and tracking project in videos using YOLOv11 and DeepSort.
+
+This project allows training and inference of YOLOv11 models (nano and small versions), batch video processing, and object tracking with DeepSort to measure the time vehicles remain in the scene (e.g., parking lot analysis).
 ```
 Project Structure
 📂 YOLO Car Inference  
  ├── 📄 YOLO_CD_train.py          # Main py training 
  ├── 📄 YOLO_CD_inference.py      # Inference with pre-trained model (1 video)
  ├── 📄 YOLO_CD_script.py         # Py code for larger-scale production (>1 videos)
+ ├── 📄 YOLO_deepsort.py          # Deepsort Implementation
  ├── 📄 run_all_videos.bat        # Script customizable to MLops
  ├── 📄 README.md                 # This file
  ├── 📂 Plots & analitics         # All training and performance data
+      ├──📂 analytics_train_nano
+      └──📂 analytics_small_nano
  ├── 📂 trafic_data
       ├──📂 train                 # Train images and Labels in YOLO format
       ├──📂 valid                 # Validation images and Labels in YOLO format
@@ -16,7 +21,8 @@ Project Structure
  ├── 📂 outputs                   # Video outputs (after inference)
  ├── 📂 videos                    # Video inputs 
  └── 📂 models                    # trained model
-      └──📄 best.pt               # Result from YOLO_CD_train.py
+      ├──📄 small_best.pt         # Result from YOLO_CD_train.py (small 9 mill parameters)
+      └──📄 nano_best.pt          # Result from YOLO_CD_train.py (nano 2.9 mill parameters)
  ```
 🧰 Libraries Used:
 ```python
@@ -24,16 +30,18 @@ import os
 from ultralytics import YOLO (yolov11)
 import torch
 import sys
+from deep_sort_realtime.deepsort_tracker import DeepSort
+import cv2
 ```
 How to use:
 🏋️‍♂️ Model Training
-To train YOLOv11 on your dataset defined in data_1.yaml:
+To train YOLOv11 (small or nano) on your dataset defined in data_1.yaml:
 ```bash
       python YOLO_CD_train.py
 ```
 ```
 Key parameters:
-  Base model: yolo11n.pt
+  Base model: yolo11n.pt (nano) or yolo11s.pt (small)
   Epochs: 50
   Image size: 640x640
   Batch size: 16
@@ -88,18 +96,36 @@ for %%f in ("%VIDEO_FOLDER%\*.mp4") do (
 echo All videos processed ;)
 pause
 ```
+🔎 Vehicle Tracking with DeepSort
+Track multiple vehicles in a video and measure how long they remain in frame:
+```bash
+python YOLO_CD_deepsort.py
+```
+```
+Features:
+* Assigns unique IDs to each detected vehicle
+* Tracks objects across frames using DeepSort
+* Displays time in seconds each vehicle stays in scene
+Saves annotated video in DeepSort outputs/
+```
+
 📈 Results
-Annotated videos with bounding boxes around detected vehicles.
-Training metrics: precision, recall, mAP.
+* Vehicle detection with YOLOv11
+* Multi-object tracking with DeepSort
+* Annotated videos with IDs and timers for each vehicle
+* Training metrics: precision, recall, mAP
+
+
 Example output:
 
 ![Demo](outputs/Results1.gif)
 ![Demo](outputs/results2.gif)
 ![Demo](outputs/results3.gif)
+![Demo](outputs/small_resultsdeepsort.gif)
 <img width="1912" height="1079" alt="image" src="https://github.com/user-attachments/assets/92d03663-26c2-4f71-9884-09ba0f17b214" />
 ![val_batch0_pred](https://github.com/user-attachments/assets/cb522236-76a6-4588-bee8-53548047e938)
 ![val_batch1_labels](https://github.com/user-attachments/assets/d1c81060-cdf3-46fd-aac3-c7cd5ae86ec7)
-<img width="2250" height="1500" alt="BoxP_curve" src="https://github.com/user-attachments/assets/bea61dcc-5d16-4301-baf4-72e5f26f5533" />
+
 
 
 ✒️ References
